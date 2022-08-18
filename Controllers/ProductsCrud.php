@@ -3388,6 +3388,7 @@ public function printbarcodwi($id)
         $builder1->select('users.*');
         $builder1->where('users.designation = "admin" ' );
         $sdata['hello'] = $builder1->get()->getResultArray();
+        $sess = session()->get('user_name');
         $session->set($sdata);
 
         $builder222 =  $db->table('barcodes');
@@ -3404,24 +3405,28 @@ public function printbarcodwi($id)
         $random = rand(100000, 999999);
         $rands = [
             'random' =>$random,
+            'terms' => $sess,
             'tbl' =>$this->request->getvar('table'),
         ];
 
         session()->set($rands);
         $datam = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'Stockin',
         ];
 
         $dataso = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'Stockout'
         ];
 
         $dataf = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'faulty'
         ];
@@ -3429,30 +3434,35 @@ public function printbarcodwi($id)
 
         $datafo = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'faultyout'
         ];
 
         $dataw = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'warrantyin'
         ];
 
         $datawo = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'warranty out'
         ];
 
         $datac = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'credit'
         ];
 
         $datad = [
             'random' => $random,
+            'terms' => $sess,
             'time' => date("h:i:sa"),
             'tbl' => 'debit'
         ];
@@ -3462,7 +3472,6 @@ public function printbarcodwi($id)
             $j = $this->request->getVar('find');
             $i = $this->request->getVar('search');
             $model = $this->request->getVar('model');
-
             $builde = $db->table('verify');
             $builde->select('*');
             $builde->like('model', $model) &&
@@ -6684,6 +6693,7 @@ public function printbarcodwi($id)
                 $builder = $db->table('verify');
                 $builder->select('*');
                 $builder->where('random' , $s);
+                $builder->where('terms' , $sess);
                 $builder->update(['model' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
 
@@ -6692,12 +6702,14 @@ public function printbarcodwi($id)
                 $builder = $db->table('verify');
                 $builder->select('*');
                 $builder->where('random' , $s);
+                $builder->where('terms' , $sess);
                 $builder->update(['brand' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
              }      
             elseif($this->request->getVar('column') == 'Hdd'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['hdd' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6706,6 +6718,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Screen'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['screen' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6714,6 +6727,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Status'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['status' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6723,6 +6737,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Speed'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 
                 $builder->update(['speed' => $x]);
@@ -6732,6 +6747,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Cpu'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['cpu' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6740,6 +6756,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Price'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['price' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6748,6 +6765,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Ram'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['ram' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6756,6 +6774,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Odd'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['odd' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6764,6 +6783,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Problem'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['problem' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6772,6 +6792,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Conditions'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['conditions' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6780,6 +6801,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Type'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['type' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6788,6 +6810,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'gen'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['gen' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6795,6 +6818,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Part'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['part' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6802,6 +6826,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Modelid'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['modelid' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6816,6 +6841,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Vendor'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['vendor' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6823,6 +6849,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Screen'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['screen' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6830,6 +6857,7 @@ public function printbarcodwi($id)
             elseif($this->request->getVar('column') == 'Comment'){
                 $builder = $db->table('verify');
                 $builder->select('*');
+                $builder->where('terms' , $sess);
                 $builder->where('random' , $s);
                 $builder->update(['comment' => $x]);
                 return redirect()->back()->with('status', 'replaced successfully');
@@ -6843,6 +6871,7 @@ public function printbarcodwi($id)
         helper(['form', 'url']);
         $builder = $db->table('verify');
         $builder->select('verify.*')->orderBy('time', 'DESC');
+        $builder->where('terms' , $sess);
         $data['items'] = $builder->get()->getResultArray();
         $data['user_data'] = $session->get('designation');
         $data['true'] = 0;
@@ -6865,9 +6894,11 @@ public function printbarcodwi($id)
     public function clear()
     {
         $db      = \Config\Database::connect();
+        $sess = session()->get('user_name');
         $builder1 = $db->table("verify");
         $builder1->select("verify.*");
-        $builder1->emptyTable();
+        $builder1->where('terms', $sess);
+        $builder1->delete();
         return redirect()->back()->with('status', 'cleared');
 
     }
@@ -6940,450 +6971,512 @@ public function printbarcodwi($id)
         return redirect()->to(site_url('/verify'));
     }
 
-    // verification table
-    public function sverify()
-    {
-        
-        $db      = \Config\Database::connect();
-        $serialno = $this->request->getPost('serialno');
-        $random = $this->request->getVar('random');
-        $session = \Config\Services::session();
-        $sess  = session()->get('username');
-        // echo '<pre>';
-        // print_r($random);
+     // verification table
+     public function sverify()
+     {
+        // echo 'true';
         // exit;
-
-        // if($this->request->getVar('serialno')){
-        //     $insert = [
-        //         'serialno' => $this->request->getPost('serialno'),
-        //         'tbl' => $this->request->getPost('table'),
-        //     ];
-    
-        //     $db->table('barcodes')->insert($insert);
-        //     return redirect()->to('ProductsCrud/verify');
-
-        // }
-        $b = $db->table('verify');
-        $b->selectMax('id');
-        $c = $b->get()->getresultarray();
-        foreach($c as $c1):
-        endforeach;
-
-        if($c1['id']){
-        $d = $db->table('verify');
-        $d->select('random');
-        $d->where('id', $c1['id']);
-        $e = $d->get()->getResultarray();
-        foreach($e as $e1):
-        endforeach;
-        $random = $e1['random'];
-        }
-        else{
-            $random = rand(10000000, 99999999);
-        }
-
-        $datam = [
-            'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'Stockin'
-        ];
-
-        $dataso = [
-            'random' => $random,
-
-            'time' => date("h:i:sa"),
-            'tbl' => 'Stockout'
-        ];
-
-        $dataf = [
-            'random' => $random,
-
-            'time' => date("h:i:sa"),
-            'tbl' => 'faulty'
-        ];
-
-        $datafo = [
-             'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'faultyout'
-        ];
-
-        $dataw = [
-             'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'warrantyin'
-        ];
-
-        $datawo = [
-             'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'warranty out'
-        ];
-
-        $datac = [
-             'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'credit'
-        ];
-
-        $datad = [
-             'random' => $random,
-            'time' => date("h:i:sa"),
-            'tbl' => 'debit'
-        ];
-
-        
-
-
-        $table = $this->request->getVar('table');
-        $date = date("h:i:sa");
-
-        $builder5 = $db->table("verify");
-        $builder5->select('verify.*')->orderBy('time', 'DESC');
-        $builder5->where('verify.assetid', $serialno);
-        $data5 = $builder5->get()->getResultArray();
-
-        if($table == 'Stockin'){
-        $builder1 = $db->table("masterlist");
-        $builder1->select('masterlist.*');
-        $builder1->where('masterlist.assetid', $serialno);
-        $data1 = $builder1->get()->getResultArray();
-
-        
-        foreach($data1 as $r) {
-            if(!$data5){
-                $builder5->insert($r);
-            }
-            $builder51 = $db->table('verify');
-            $builder51->select('*');
-            $builder51->where('verify.assetid', $serialno);
-            $builder51->update($datam);
-            }
-            return redirect()->to('ProductsCrud/verify');
-        }
-
-        if($table =='stockout'){
-            $builder2 = $db->table("stockout");
-            $builder2->select('stockout.*');
-            $builder2->where('stockout.assetid', $serialno);
-            $data2 = $builder2->get()->getResultArray(); 
-            
-            foreach($data2 as $r) {
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($dataso);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-        }
-        if($table == 'warrantyin'){
-        $builder3 = $db->table("warrantyin");
-        $builder3->select('warrantyin.*');
-        $builder3->where('warrantyin.assetid', $serialno);
-        $data3 = $builder3->get()->getResultArray();
-        foreach($data3 as $r) {
-          
-            if(!$data5){
-               $builder5->insert($r);
-            }
-            $builder51 = $db->table('verify');
-            $builder51->select('*');
-            $builder51->where('verify.assetid', $serialno);
-            $builder51->update($dataw);
-
-        }
-        return redirect()->to('ProductsCrud/verify');
-        }
-
-        if($table == 'faulty'){
-            $builder3 = $db->table("faulty");
-            $builder3->select('faulty.*');
-            $builder3->where('faulty.assetid', $serialno);
-            $data3 = $builder3->get()->getResultArray();
-            foreach($data3 as $r) {
-              
-                if(!$data5){
-                   $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($dataf);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-            }
-
-        if($table == 'faultyout'){
-            $builder3 = $db->table("faultyout");
-            $builder3->select('faultyout.*');
-            $builder3->where('faultyout.assetid', $serialno);
-            $data3 = $builder3->get()->getResultArray();
-            foreach($data3 as $r) {
-                
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datafo);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-            } 
-        if($table == 'warrantyout'){
-            $builder3 = $db->table("warrantyout");
-            $builder3->select('warrantyout.*');
-            $builder3->where('warrantyout.assetid', $serialno);
-            $data3 = $builder3->get()->getResultArray();
-            foreach($data3 as $r) {
-                
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datawo);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-            } 
-
-        if($table == 'credit'){
-            $builder3 = $db->table("credit");
-            $builder3->select('credit.*');
-            $builder3->where('credit.assetid', $serialno);
-            $data3 = $builder3->get()->getResultArray();
-            foreach($data3 as $r) {
-                
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datac);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-            }
-            
-        if($table == 'debit'){
-            $builder3 = $db->table("debit");
-            $builder3->select('debit.*');
-            $builder3->where('debit.assetid', $serialno);
-            $data3 = $builder3->get()->getResultArray();
-            foreach($data3 as $r) {
-                
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datad);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-            }     
-        if($table == 'All'){
-            
-        $builder1 = $db->table("masterlist");
-        $builder1->select('masterlist.*');
-        $builder1->where('masterlist.assetid', $serialno);
-        $data1 = $builder1->get()->getResultArray();
-
-        $builder2 = $db->table("stockout");
-        $builder2->select('stockout.*');
-        $builder2->where('stockout.assetid', $serialno);
-        $data2 = $builder2->get()->getResultArray();
-
-        $builder3 = $db->table("warrantyin");
-        $builder3->select('warrantyin.*');
-        $builder3->where('warrantyin.assetid', $serialno);
-        $data3 = $builder3->get()->getResultArray();
-
-        $builder4 = $db->table("faulty");
-        $builder4->select('faulty.*');
-        $builder4->where('faulty.assetid', $serialno);
-        $data4 = $builder4->get()->getResultArray();
-
-        $builder6 = $db->table("faultyout");
-        $builder6->select('faultyout.*');
-        $builder6->where('faultyout.assetid', $serialno);
-        $data6 = $builder6->get()->getResultArray();
-
-        $builder7 = $db->table("warrantyout");
-        $builder7->select('warrantyout.*');
-        $builder7->where('warrantyout.assetid', $serialno);
-        $data7 = $builder7->get()->getResultArray();
-
-        $builder8 = $db->table("debit");
-        $builder8->select('debit.*');
-        $builder8->where('debit.assetid', $serialno);
-        $data8 = $builder8->get()->getResultArray();
-
-        $builder9 = $db->table("credit");
-        $builder9->select('credit.*');
-        $builder9->where('credit.assetid', $serialno);
-        $data9 = $builder9->get()->getResultArray();
-
-    //    checking masterlist
-        if($data1){
-            foreach($data1 as $r) {
-                if(!$data5){
-
-                    // echo '<pre>';
-                    // print_r($data1);
-                    // exit;
-                    $builder5->insert($r);
-                }
-        
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datam);
-                // $builder5->update(['time'=> $date]);                            
-
-                }
-                return redirect()->to('ProductsCrud/verify');
-        } 
-
-        // checking stockout
-        elseif($data2){
-            foreach($data2 as $r) {
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($dataso);
-    
-            }
-            return redirect()->to('ProductsCrud/verify');
-        }
-       
-        // checking warrantyin
-        elseif($data3){
-            foreach($data3 as $r) {
-          
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($dataw);
-                // $builder5->update(['time'=> $date]);                            
-
-
-            }
-            return redirect()->to('ProductsCrud/verify');
-
-        }
-
-        // checking faulty in
-        elseif($data4){
-            foreach($data4 as $r) {
-          
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($dataf);
-                // $builder5->update(['time'=> $date]);                            
-
-
-            }
-            return redirect()->to('ProductsCrud/verify');
-
-        }        
-        
-        // checkin table  faultyout
-        elseif($data6){
-            foreach($data6 as $r) {
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datafo);
-                // $builder5->update(['time'=> $date]);                            
-
-            }
-            return redirect()->to('ProductsCrud/verify');
-
-        }
          
-        // checking table warrantyout
-        elseif($data7){
-            foreach($data7 as $r) {
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datawo);
-                // $builder5->update(['time'=> $date]);                            
+         $db      = \Config\Database::connect();
+         $session = \Config\Services::session();
+         $sess = $session->get('user_name');
+         // $seri alno = $this->request->getPost('serialno');
+         if($this->request->getVar('serialno')){
+             $data = [
+                 'serialno' => $this->request->getVar('serialno'),
+                //  'random' => $this->request->getVar('random'),
+                 'tbl' => $this->request->getVar('table'),
+                 'session' => $sess,
+             ];
+            //  echo '<pre>';
+            //  print_r($data);
+            //  exit;
+             $builder14 = $db->table('barcodes');
+             $builder14->select('serialno');
+             $builder14->where('serialno' , $data['serialno']);
+             $da = $builder14->get()->getResultArray();
+             if(!$da){
+                $builder14->insert($data);
+             }
+             else{
+                $builder14->update($data);
 
-            }
-            return redirect()->to('ProductsCrud/verify');
+             }
+             return redirect()->to(base_url('ProductsCrud/verify'));
+         }
+ 
+         $datam = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'tbl' => 'Stockin',
+             'terms' => $sess,
 
-        }
+         ];
+ 
+         $dataso = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
 
-        // checkin in debit 
-        elseif($data8){
-            foreach($data8 as $r) {
-                if(!$data5){
-                    $builder5->insert($r);
-                }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datad);
-                // $builder5->update(['time'=> $date]);                            
+             'tbl' => 'Stockout'
+         ];
+ 
+         $dataf = [
+             'random' => $this->request->getPost('random'),
+             'terms' => $sess,
+             'time' => date("h:i:sa"),
+             'tbl' => 'faulty'
+         ];
+ 
+         $datafo = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
+             'tbl' => 'faultyout'
+         ];
+ 
+         $dataw = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
+             'tbl' => 'warrantyin'
+         ];
+ 
+         $datawo = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
+             'tbl' => 'warranty out'
+         ];
+ 
+         $datac = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
+             'tbl' => 'credit'
+         ];
+ 
+         $datad = [
+             'random' => $this->request->getPost('random'),
+             'time' => date("h:i:sa"),
+             'terms' => $sess,
+             'tbl' => 'debit'
+         ];
+ 
+         if($this->request->getVar('ans') == 'true'){
+            // echo 'true';
+            // exit;
+             $bulders = $db->table('barcodes');
+             $bulders->select('*');
+             $bulders->where('session' , $sess);
+             $databs = $bulders->get()->getResultArray();
+             foreach($databs as $dbs):
+             endforeach;
+             $table = $dbs['tbl'];
+             $serialno = $dbs['serialno'];
+             $date = date("h:i:sa");
+ 
+             $builder5 = $db->table("verify");
+             $builder5->select('verify.*')->orderBy('time', 'DESC');
+             $builder5->where('verify.assetid', $serialno);
+             $data5 = $builder5->get()->getResultArray();
+ 
+             if($table == 'Stockin'){
+             $bulders = $db->table('barcodes');
+             $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                 foreach($databs as $dsb){
+                     $serialno = $dsb['serialno'];
+                     $builder1 = $db->table("masterlist");
+                     $builder1->select('masterlist.*');
+                     $builder1->where('masterlist.assetid', $serialno);
+                     $data1 = $builder1->get()->getResultArray();
+                     foreach($data1 as $r) {
+                         if(!$data5){
+                             $builder5->insert($r);
+                         }
+                             $builder51 = $db->table('verify');
+                             $builder51->select('*');
+                             $builder51->where('verify.assetid', $serialno);
+                             $builder51->update($datam);
+                         }
+                 }
+                 $db->table('barcodes')->emptyTable();
+                 return redirect()->to('ProductsCrud/verify');
+             } 
+             
+             if($table == 'stockout'){
+                 $bulders = $db->table('barcodes');
+                 $bulders->select('*');
+                 $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                     foreach($databs as $dsb){
+                         $serialno = $dsb['serialno'];
+                         $builder1 = $db->table("stockout");
+                         $builder1->select('stockout.*');
+                         $builder1->where('stockout.assetid', $serialno);
+                         $data1 = $builder1->get()->getResultArray();
+                         foreach($data1 as $r) {
+                             if(!$data5){
+                                 $builder5->insert($r);
+                             }
+                                 $builder51 = $db->table('verify');
+                                 $builder51->select('*');
+                                 $builder51->where('verify.assetid', $serialno);
+                                 $builder51->update($dataso);
+                             }
+                     }
+                     $db->table('barcodes')->emptyTable();
+                     return redirect()->to('ProductsCrud/verify');
+                 }
+ 
+                 if($table == 'warrantyin'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("warrantyin");
+                             $builder1->select('warrantyin.*');
+                             $builder1->where('warrantyin.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($dataw);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+ 
+                 if($table == 'faulty'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("faulty");
+                             $builder1->select('faulty.*');
+                             $builder1->where('faulty.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($dataf);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+ 
+                 if($table == 'faultyout'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("faultyout");
+                             $builder1->select('faultyout.*');
+                             $builder1->where('faultyout.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($datafo);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+                 if($table == 'warrantyout'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("warrantyout");
+                             $builder1->select('warrantyout.*');
+                             $builder1->where('warrantyout.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($datawo);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+                 if($table == 'credit'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("credit");
+                             $builder1->select('credit.*');
+                             $builder1->where('credit.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($datac);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+ 
+                 if($table == 'debit'){
+                     $bulders = $db->table('barcodes');
+                     $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                         foreach($databs as $dsb){
+                             $serialno = $dsb['serialno'];
+                             $builder1 = $db->table("debit");
+                             $builder1->select('debit.*');
+                             $builder1->where('debit.assetid', $serialno);
+                             $data1 = $builder1->get()->getResultArray();
+                             foreach($data1 as $r) {
+                                 if(!$data5){
+                                     $builder5->insert($r);
+                                 }
+                                     $builder51 = $db->table('verify');
+                                     $builder51->select('*');
+                                     $builder51->where('verify.assetid', $serialno);
+                                     $builder51->update($datad);
+                                 }
+                         }
+                         $db->table('barcodes')->emptyTable();
+                         return redirect()->to('ProductsCrud/verify');
+                 }
+ 
+          if($table == 'All'){
+                $bulders = $db->table('barcodes');
+                 $bulders->select('*');
+             $bulders->where('session' ,$sess);
+             $databs = $bulders->get()->getResultArray();
+                 foreach($databs as $dsb):
+                  $serialno = $dsb['serialno'];
+             
+                 $builder1 = $db->table("masterlist");
+                 $builder1->select('masterlist.*');
+                 $builder1->where('masterlist.assetid', $serialno);
+                 $data1 = $builder1->get()->getResultArray();
+ 
+                 $builder2 = $db->table("stockout");
+                 $builder2->select('stockout.*');
+                 $builder2->where('stockout.assetid', $serialno);
+                 $data2 = $builder2->get()->getResultArray();
+ 
+                 $builder3 = $db->table("warrantyin");
+                 $builder3->select('warrantyin.*');
+                 $builder3->where('warrantyin.assetid', $serialno);
+                 $data3 = $builder3->get()->getResultArray();
+ 
+                 $builder4 = $db->table("faulty");
+                 $builder4->select('faulty.*');
+                 $builder4->where('faulty.assetid', $serialno);
+                 $data4 = $builder4->get()->getResultArray();
+ 
+                 $builder6 = $db->table("faultyout");
+                 $builder6->select('faultyout.*');
+                 $builder6->where('faultyout.assetid', $serialno);
+                 $data6 = $builder6->get()->getResultArray();
+ 
+                 $builder7 = $db->table("warrantyout");
+                 $builder7->select('warrantyout.*');
+                 $builder7->where('warrantyout.assetid', $serialno);
+                 $data7 = $builder7->get()->getResultArray();
+ 
+                 $builder8 = $db->table("debit");
+                 $builder8->select('debit.*');
+                 $builder8->where('debit.assetid', $serialno);
+                 $data8 = $builder8->get()->getResultArray();
+ 
+                 $builder9 = $db->table("credit");
+                 $builder9->select('credit.*');
+                 $builder9->where('credit.assetid', $serialno);
+                 $data9 = $builder9->get()->getResultArray();
 
-
-            }
-            return redirect()->to('ProductsCrud/verify');
-
-        }
+                 
+ 
+            //    checking masterlist
+                if($data1){
+                    foreach($data1 as $r) {
+                        if(!$data5){
+                            $builder5->insert($r);
+                        }
+                
+                        $builder51 = $db->table('verify');
+                        $builder51->select('*');
+                        $builder51->where('verify.assetid', $serialno);
+                        $builder51->update($datam);
+                        // $builder5->update(['time'=> $date]);                            
+                    }
+                 $db->table('barcodes')->emptyTable();
+                //  return redirect()->to('ProductsCrud/verify');
+               } 
+ 
+            // checking stockout
+            elseif($data2){
+                foreach($data2 as $r) {
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($dataso);
         
-        elseif($data9){
-            foreach($data9 as $r) {
-        
-                if(!$data5){
-                    $db->table('verify')->insert($r);
                 }
-                $builder51 = $db->table('verify');
-                $builder51->select('*');
-                $builder51->where('verify.assetid', $serialno);
-                $builder51->update($datac);
-                // $builder5->update(['time'=> $date]);                            
-
+                $db->table('barcodes')->emptyTable();
+                // return redirect()->to('ProductsCrud/verify');
             }
-            return redirect()->to('ProductsCrud/verify');
-        }
+        
+            // checking warrantyin
+            elseif($data3){
+                foreach($data3 as $r) {
+            
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($dataw);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                $db->table('barcodes')->emptyTable();
+                // return redirect()->to('ProductsCrud/verify');
+            }
+ 
+            // checking faulty in
+            elseif($data4){
+                foreach($data4 as $r) {
+            
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($dataf);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                 $db->table('barcodes')->emptyTable();
+                //  return redirect()->to('ProductsCrud/verify');
+            }        
+         
+            // checkin table  faultyout
+            elseif($data6){
+                foreach($data6 as $r) {
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($datafo);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                $db->table('barcodes')->emptyTable();
+                // return redirect()->to('ProductsCrud/verify');
+            }
+          
+            // checking table warrantyout
+            elseif($data7){
+                foreach($data7 as $r) {
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($datawo);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                 $db->table('barcodes')->emptyTable();
+                //  return redirect()->to('ProductsCrud/verify');
+            }
+ 
+            // checkin in debit 
+            elseif($data8){
+                foreach($data8 as $r) {
+                    if(!$data5){
+                        $builder5->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($datad);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                $db->table('barcodes')->emptyTable();
+                // return redirect()->to('ProductsCrud/verify');
+            }
+         
+            elseif($data9){
+                foreach($data9 as $r) {
+            
+                    if(!$data5){
+                        $db->table('verify')->insert($r);
+                    }
+                    $builder51 = $db->table('verify');
+                    $builder51->select('*');
+                    $builder51->where('verify.assetid', $serialno);
+                    $builder51->update($datac);
+                    // $builder5->update(['time'=> $date]);                            
+                }
+                $db->table('barcodes')->emptyTable();
+                // return redirect()->to('ProductsCrud/verify');
+            }
 
-        else{
-        return redirect()->to('ProductsCrud/verify'); 
+         else{
+            $db->table('barcodes')->emptyTable();
+         return redirect()->to('ProductsCrud/verify'); 
+         
 
-        }
-
-        }
-        return redirect()->to('ProductsCrud/verify'); 
-    }
+         }
+         endforeach;
+         return redirect()->to('ProductsCrud/verify'); 
+         $db->table('barcodes')->emptyTable();
+        
+         // }
+       }
+         $db->table('barcodes')->emptyTable();
+         }
+         $db->table('barcodes')->emptyTable();
+         return redirect()->to('ProductsCrud/verify'); 
+     }
     public function verifieds() {
     $db      = \Config\Database::connect();
     $session = \Config\Services::session();
@@ -8355,6 +8448,8 @@ public function printbarcodwi($id)
     public function delvout() {
         $session = \Config\Services::session();
         $datedelivered = $this->request->getVar('datedelivered');
+        $sess = $session->get('user_name');
+
         $data = [
             'user_name' => $session->get('user_name'),
             'random' => $this->request->getVar('random'),
@@ -8476,14 +8571,10 @@ public function printbarcodwi($id)
         }
 
         $db      = \Config\Database::connect();
-        
-
         $builder899 = $db->table("tempinsert");
         $builder899->select('tempinsert.assetid');
         $data899 = $builder899->get()->getResultArray();
-
         foreach($data899 as $mast):
-
 
         $db      = \Config\Database::connect();
         $builder8999 = $db->table("masterlist");
@@ -9674,49 +9765,11 @@ public function printbarcodwi($id)
             'deliver' => $this->request->getPost('deliver'),
 
         ];
-
-        $builder = $db->table("customer");
-        $builder->select('customer.*');
-        $builder->where('customer.username', $data['username']);
-        $data1 = $builder->get()->getResultArray();
-
-        $builder1 = $db->table("dcustomer");
-        $builder1->select('dcustomer.*');
-        $num = $builder1->countAll();
-        $builder1->where('dcustomer.username', $data['username']);
-        $data2 = $builder1->get()->getResultArray();
-
-        $count = 1;
-        foreach($data1 as $r) { // loop over results
-          
-        if($num < 1 ){
-            $db->table('dcustomer')->insert($r);
-            $builder1->update(['deliver' => $data['deliver']]);
-
-        }
-        elseif(!$data2){
-            $db->table('dcustomer')->update($r);
-            $builder1->update(['deliver' => $data['deliver']]);
-
-                
-        }
-
-        $builder1->update(['random' => $data['random']]);
-        }
-        return redirect()->to('ProductsCrud/manual'); 
-
-        
-    }
-
-    public function dsub()
-    {
-        helper(['form', 'url']);
-        $db      = \Config\Database::connect();
-        $data1 = array();
-        $data = [
-            'username' => $this->request->getPost('username'),
+        $sess = session()->get('user_name');
+        $data2 = [
             'random' => $this->request->getPost('random'),
             'deliver' => $this->request->getPost('deliver'),
+            'vendor' => $sess
 
         ];
 
@@ -9736,14 +9789,66 @@ public function printbarcodwi($id)
           
         if($num < 1 ){
             $db->table('dcustomer')->insert($r);
-            $builder1->update(['deliver' => $data['deliver']]);
+            $builder1->update($data2);
 
         }
         elseif(!$data2){
             $db->table('dcustomer')->update($r);
-            $builder1->update(['deliver' => $data['deliver']]);
+            $builder1->update($data2);
 
                 
+        }
+
+        $builder1->update($data2);
+        }
+        return redirect()->to('ProductsCrud/manual'); 
+
+        
+    }
+
+    public function dsub()
+    {
+        helper(['form', 'url']);
+        $db      = \Config\Database::connect();
+        $data1 = array();
+        $sess = session()->get('user_name');
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'random' => $this->request->getPost('random'),
+            
+
+        ];
+        $data22 = [
+            'deliver' => $this->request->getPost('deliver'),
+            'vendor' => $sess,
+        ];
+
+        // echo '<pre>';
+        // print_r($data22);
+        // exit;
+
+        $builder = $db->table("customer");
+        $builder->select('customer.*');
+        $builder->where('customer.username', $data['username']);
+        $data1 = $builder->get()->getResultArray();
+
+        $builder1 = $db->table("dcustomer");
+        $builder1->select('dcustomer.*');
+        $num = $builder1->countAll();
+        $builder1->where('dcustomer.username', $data['username']);
+        $data2 = $builder1->get()->getResultArray();
+
+        $count = 1;
+        foreach($data1 as $r) { // loop over results
+          
+        if($num < 1 ){
+            $db->table('dcustomer')->insert($r);
+            $builder1->update($data22);
+
+        }
+        elseif(!$data2){
+            $db->table('dcustomer')->update($r);
+            $builder1->update($data22);
         }
 
         $builder1->update(['random' => $data['random']]);
@@ -10205,8 +10310,6 @@ public function printbarcodwi($id)
         $checks = $check->get()->getResultArray();
         if($checks){
 
-           
-
             $db      = \Config\Database::connect();
             $clear = $db->table("tmdelivery");
             $clear->select('tmdelivery.*');
@@ -10261,10 +10364,14 @@ public function printbarcodwi($id)
             $delete1->select('product2.*');
             $delete1->where('product2.ref', $id);
             $delete1->delete();
-    
-    
             return redirect()->to(base_url('/ProductsCrud/manual'));
         }
+
+        $sess = session()->get('user_name');
+        $updatem = [
+            'terms' => $sess,
+            'customer' => ''
+        ];
 
         $db      = \Config\Database::connect();
         $clear = $db->table("tempinsert");
@@ -10306,7 +10413,7 @@ public function printbarcodwi($id)
         $builder113->select('tempinsert.*');
         $builder113->where('tempinsert.random', $id);
         // $data113  = $builder113->get()->getResultArray();
-        $builder113->update(['customer'=> '']);
+        $builder113->update($updatem);
         // echo '<pre>';
         // print_r($data113);
         // exit;
@@ -10338,8 +10445,10 @@ public function printbarcodwi($id)
             $db->table('dcustomer')->insert($c);
             }
             else{
+
             $db->table('dcustomer')->update($c);
             }
+            $builder11->update(['vendor' => $sess]);
         }
 
 
@@ -10633,6 +10742,7 @@ public function printbarcodwi($id)
         $sdata['hello'] = $builder1->get()->getResultArray();
         $session->set($sdata);
         $data['user_data'] = $session->get('designation');
+        $sess = session()->get('user_name');
 
         helper(['form', 'url']);
         $db      = \Config\Database::connect();
@@ -10643,9 +10753,11 @@ public function printbarcodwi($id)
         $db      = \Config\Database::connect();
         $builder = $db->table('tempinsert');
         $builder->select('tempinsert.*');
+        $builder->where('terms', $sess);
 
         $builder1 = $db->table('dcustomer');
         $builder1->select('dcustomer.*');
+        $builder1->where('vendor', $sess);
         $data['customer'] = $builder1->get()->getResult();
         $data['masterlist'] = $builder->get()->getResult();
         return view('products/deliver', $data);
@@ -10721,12 +10833,19 @@ public function printbarcodwi($id)
     public function delvsub()
     {
         try{
+        $session = \Config\Services::session();
+        $sess = $session->get('user_name');
         helper(['form', 'url']);
+        $session = \Config\Services::session();
         $db      = \Config\Database::connect();
+        
         $data1 = array();
         $data = [
             'serialno' => $this->request->getPost('serialno'),
+        ];
+        $data22 = [
             'random' => $this->request->getPost('random'),
+            'terms' => session()->get('user_name'),
         ];
 
         $builder = $db->table("masterlist");
@@ -10747,7 +10866,10 @@ public function printbarcodwi($id)
         else{
             $db->table('tempinsert')->insert($r);
         }
-        $builder1->update(['random' => $data['random']]);
+        $builder11 = $db->table("tempinsert");
+        $builder11->select('*');
+        $builder11->where('assetid', $data['serialno']);
+        $builder11->update($data22);
         }
         return redirect()->to('ProductsCrud/delv');
 
@@ -10872,6 +10994,7 @@ public function printbarcodwi($id)
     public function mdelvout(){
         $session = \Config\Services::session();
         $datedelivered = $this->request->getVar('datedelivered');
+        $sess = $session->get('user_name');
         $data = [
             'user_name' => $session->get('user_name'),
             'random' => $this->request->getVar('random'),
