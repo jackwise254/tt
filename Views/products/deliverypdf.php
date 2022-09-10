@@ -42,11 +42,15 @@ $date = $item->datedelivered;
 $random = $item->random;
 $email = $item->email;
 $phone = $item->phone;
+$deliver = $item->deliver;
 
 
 
 
 }
+// echo '<pre>';
+// print_r($deliver);
+// exit;
 
 class PDF extends FPDF
 {
@@ -186,8 +190,8 @@ $connString =  $db->getConnstring();
 date_default_timezone_set("Africa/Nairobi");
 $link = mysqli_connect("localhost", "root", "", "users");
 
-$sql = "INSERT INTO `product2` (phone, email,username,fname, location, date, ref, document , delvnote, user_name) 
-VALUES ('$phone','$email','$username','$vendor', '$address', '$date','$ref', '$namepdf' , '$delvnote', '$user_name')";
+$sql = "INSERT INTO `product2` (phone, email,username,fname, location, date, ref, document , delvnote, user_name, vendor) 
+VALUES ('$phone','$email','$username','$vendor', '$address', '$date','$ref', '$namepdf' , '$delvnote', '$user_name', '$deliver')";
 
 $results = mysqli_query($link, $sql);
 
